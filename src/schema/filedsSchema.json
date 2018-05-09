@@ -1,0 +1,74 @@
+{
+    "$class": {
+      "type": "string",
+      "default": "org.zjhl.network.Agency",
+      "description": "This is unique ID-NAME",
+      "disabled": true
+    },
+    "agencyId": {
+      "type": "string",
+      "default": "",
+      "description": "This is bank of abbreviation",
+      "disabled": true
+    },
+    "areaId": {
+      "type": "string",
+      "default": "",
+      "description": "This is city name",
+      "disabled": false
+    },
+    "countryId": {
+      "type": "string",
+      "default": "",
+      "description": "This is city china name",
+      "disabled": false
+    },
+    "companyName": {
+      "type": "string",
+      "default": "",
+      "description": "This is bank of chinese name",
+      "disabled": false
+    },
+    "assetDBId": {
+      "type": "string",
+      "default": "",
+      "description": "This is ",
+      "disabled": false
+    },
+    "locNo": {
+      "type": "string",
+      "default": "",
+      "description": "This is ",
+      "disabled": false
+    },
+    "openSwift": {
+      "type": "string",
+      "default": "",
+      "description": "This is ",
+      "disabled": false
+    },
+    "accepttingSwift": {
+      "type": "string",
+      "default": "",
+      "description": "This is ",
+      "disabled": false
+    },
+    "amount": {
+      "type": "string",
+      "default": "",
+      "description": "This is ",
+      "disabled": false
+    },
+    "currency": {
+      "type": "string",
+      "default": "",
+      "description": "This is ",
+      "disabled": false
+    },
+    "owner": {
+      "type": "string",
+      "default": "",
+      "description": "This is ",
+      "disabled": false
+    }
+  }

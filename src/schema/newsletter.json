@@ -1,0 +1,57 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "title": "Newsletter Subscription",
+  "description": "Sign up for free newsletters and get more delivered to your inbox",
+  "properties": {
+    "lists": {
+      "type": "string",
+      "title": "List",
+      "enum": ["Daily New", "Promotion"],
+      "attrs": {
+        "placeholder": "Select your list subscription"
+      }
+    },
+    "$class": {
+      "type": "string",
+      "title": "$class",
+      "default": "org.zjhl.network.Agency",
+      "description": "This is unique ID-NAME",
+      "disabled": true,
+      "attrs": {
+      }
+    },
+    "agencyId": {
+      "type": "string",
+      "title": "agencyId",
+      "default": "",
+      "minLength": 1,
+      "maxLength": 100,
+      "attrs": {
+      }
+    },
+    "areaId": {
+      "type": "string",
+      "title": "areaId",
+      "default": "",
+      "attrs": {
+      }
+    },
+    "countryId": {
+      "type": "string",
+      "title": "countryId",
+      "default": "",
+      "attrs": {
+      }
+    },
+    "companyName": {
+      "type": "string",
+      "title": "companyName",
+      "default": "",
+      "attrs": {
+      }
+    }
+  },
+  "additionalProperties": false,
+  "required": ["agencyId", "areaId", "lists"]
+}

@@ -17,7 +17,7 @@ Vue.use(VueResource)
 Vue.prototype.$axios = axios
 Vue.component("HeaderNav",HeaderNav)
 Vue.component("RightMenu",RightMenu)
-
+Vue.prototype.$loading.hasOwnProperty("background","rgba(0,0,0,0.8)")
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */

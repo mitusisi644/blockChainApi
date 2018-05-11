@@ -69,9 +69,7 @@
       :visible.sync="newParticipant"
       :close-on-click-modal="false"
       :close-on-press-escape="false"
-               :before-close="handleClose">
-
-
+      :before-close="handleClose">
 
       <el-form ref="form" :model="participantFrom" label-width="80px">
         <el-form-item label="$class">
@@ -100,6 +98,7 @@
 </template>
 
 <script>
+  let loadingInstance;
   export default {
     name: 'Index',
     data () {
@@ -175,6 +174,7 @@
         });
       },
       promiseAjax(url, data, callback) {
+        var _this = this;
         var p = new Promise(function (resolve, reject) {
           $.ajax({
             url: url,
@@ -183,16 +183,15 @@
             data: data == null ? '' : JSON.stringify(data),
             async: true,
             contentType: "application/json",
+            beforeSend: function (){
+              _this.$loading({"background":"rgba(0, 0, 0, 0.8)"});
+            },
             success: function (resp) {
               callback(resp);
               resolve();
             },
             error: function (XMLHttpRequest, textStatus, errorThrown) {
-              if (XMLHttpRequest.status == "401") {
-                alert(XMLHttpRequest.status);
-              } else {
-                alert(XMLHttpRequest.responseText);
-              }
+              errorCreate(XMLHttpRequest.status+" : "+XMLHttpRequest.responseText)
               reject();
             }
           });
@@ -200,6 +199,7 @@
         return p;
       },
       curlRequest: function (urlPath,param,callbackFun){
+        this.$loading({"background":"rgba(0, 0, 0, 0.8)"});
         const https = require('https');
         const options = {
           path: urlPath,
@@ -237,7 +237,7 @@
       submitAddParticipant:function () {
         var _this = this;
         this.promiseAjax(promiseBaseUrl+'Agency',this.participantFrom, function(resp){
-          successCreate('机构添加成功')
+          successCreate('机构添加成功');
           _this.getAgency();
         }).then(
           this.newParticipant = false
@@ -277,6 +277,16 @@
       duration: 0,
       type: 'success'
     });
+    vm.$loading.close();
+  }
+  function errorCreate(msg){
+    vm.$notify({
+      title: '提示',
+      message: msg,
+      duration: 0,
+      type: 'error'
+    });
+    vm.$loading.closeAll();
   }
 </script>
 <!--

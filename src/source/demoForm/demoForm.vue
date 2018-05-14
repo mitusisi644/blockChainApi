@@ -14,6 +14,7 @@
     },
     methods: {
       onSubmitForm: function(d){
+        this.showLoad();
         this.successNotify('芳华成功');
       }
     },

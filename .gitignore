@@ -6,6 +6,8 @@ yarn-debug.log*
 yarn-error.log*
 /test/e2e/reports/
 selenium-debug.log
+.postcssrc.js
+/test
 
 # Editor directories and files
 .idea
@@ -14,3 +16,5 @@ selenium-debug.log
 *.ntvs*
 *.njsproj
 *.sln
+*.bak
+*.json

@@ -76,7 +76,7 @@
                :before-close="handleClose">
       <div class="lss-steps-warp">
         <el-steps :active="activeSteps"  direction="vertical">
-          <div @click="next(index)" v-for="(item,index) in statusFrom.statusTextes">
+          <div v-for="(item,index) in statusFrom.statusTextes">
             <el-step :title="index" description="1212">{{item}}}</el-step>
           </div>
         </el-steps>
@@ -109,13 +109,15 @@
     },
     methods: {
       getLocAssetData: function () {
+		var _this = this;
         this.handleClose();
         this.$axios(promiseBaseUrl+'LocAsset', {}, data => {
-          this.tableData = data;
+          _this.tableData = data;
         })
       },
       updateDialogForm: function (d) {
-        this.updateFrom.locAsset = this.updateFrom.locAsset + d.assetDBId;
+        var _this = this;
+		this.updateFrom.locAsset = this.updateFrom.locAsset + d.assetDBId;
         this.updateFrom.owner = d.owner;
         this.updateFrom.statusVal = d.locStatus;
         this.updateStatusVisible = true;
@@ -123,27 +125,14 @@
         var i = 1;
         for (var j in this.updateFrom.statusTextes) {
           if (j == d.locStatus) {
-            this.updateFrom.statusValIndex = i;
-            this.updateFrom.statusTextes[j] = true;
+            _this.updateFrom.statusValIndex = i;
+            _this.updateFrom.statusTextes[j] = true;
             return;
           } else {
-            this.updateFrom.statusTextes[j] = false;
+            _this.updateFrom.statusTextes[j] = false;
           }
           i++;
         }
-      },
-      curlRequest: function (urlPath, param, callbackFun) {
-        const https = require('https');
-        const options = {
-          path: urlPath,
-          method: 'DELETE'
-        };
-        const req = https.request(options, (res) => {
-          callbackFun(res);
-        });
-        req.on('error', (e) => {
-        });
-        req.end();
       },
       delLocAsset: function (d) {
         var _this = this;
@@ -154,12 +143,12 @@
         }).then(() => {
           this.curlRequest(promiseBaseUrl+'LocAsset/' + d.assetDBId, {}, function (d) {
             if (d.statusCode == 204) {
-              successCreate('删除成功');
+              _this.successNotify('删除成功');
               _this.getLocAssetData()
             }
           });
         }).catch(() => {
-          //alert('已取消')
+          //已取消
         });
       },
       statusReco: function (d){
@@ -170,11 +159,11 @@
         var i = 1;
         for (var j in this.statusFrom.statusTextes) {
           if (j == d.locStatus) {
-            this.statusFrom.statusValIndex = i;
-            this.statusFrom.statusTextes[j] = true;
-            return;
+            _this.statusFrom.statusValIndex = i;
+            _this.statusFrom.statusTextes[j] = true;
+			return;
           } else {
-            this.statusFrom.statusTextes[j] = false;
+            _this.statusFrom.statusTextes[j] = false;
           }
           i++;
         }
@@ -186,14 +175,13 @@
           "locAsset": this.updateFrom.locAsset,
           "owner": this.updateFrom.owner,
           "newLocStatus": this.updateFrom.statusVal,
-          //"transactionId": "string",
-          //"timestamp": new Date().getTime()
         }
-        promiseAjax(promiseBaseUrl+'UpdateLocAsset', where, function (resp) {
-          successCreate("更新成功");
-          _this.getLocAssetData()
+        this.promiseAjax(promiseBaseUrl+'UpdateLocAsset', where, function (resp) {
+          _this.successNotify("更新成功");
+          _this.getLocAssetData();
+		  return;
         }).then(
-          this.updateStatusVisible = false
+          _this.updateStatusVisible = false
         );
       },
       handleClose: function () {
@@ -207,13 +195,6 @@
         };
         this.statusRecoVisible = false;
         this.updateStatusVisible = false;
-      },
-      next(d) {
-        this.activeSteps = d;
-        console.log(this.activeSteps,1111111111111111111111)
-      },
-      iconClick(){
-        //el-step__icon
       }
     },
     created: function () {
@@ -221,7 +202,7 @@
     }
   };
 
-  function successCreate(msg){
+  /*function successCreate(msg){
     vm.$notify({
       title: '提示',
       message: msg,
@@ -254,7 +235,7 @@
     });
     return p;
   }
-
+*/
 </script>
 
 <style scoped>

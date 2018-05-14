@@ -17,6 +17,7 @@
     "request": "^2.85.0",
     "vue": "^2.5.2",
     "vue-axios": "^2.1.1",
+    "vue-form-generator": "^2.2.2",
     "vue-json-schema": "^1.1.0",
     "vue-notifyjs": "^0.4.2",
     "vue-resource": "^1.5.0",

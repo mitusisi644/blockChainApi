@@ -14,12 +14,12 @@
           资产
         </router-link>
       </li>
-      <!--<li>
-        <router-link id="transactions"
-                     to="/transactions">
-          交易记录
+      <li>
+        <router-link id="demoForm"
+                     to="/demoForm">
+          DemoForm
         </router-link>
-      </li>-->
+      </li>
     </ul>
   </div>
 </template>

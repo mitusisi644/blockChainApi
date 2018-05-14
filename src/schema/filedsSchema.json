@@ -9,7 +9,7 @@
       "type": "string",
       "default": "",
       "description": "This is bank of abbreviation",
-      "disabled": true
+      "disabled": false
     },
     "areaId": {
       "type": "string",

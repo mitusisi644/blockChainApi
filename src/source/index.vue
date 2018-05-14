@@ -71,7 +71,7 @@
       :close-on-press-escape="false"
       :before-close="handleClose">
 
-      <el-form ref="form" :model="participantFrom" label-width="80px">
+      <el-form ref="form" :model="participantFrom" label-width="120px">
         <el-form-item label="$class">
           <el-input disabled v-model="participantFrom.$class"></el-input>
         </el-form-item>
@@ -98,7 +98,6 @@
 </template>
 
 <script>
-  let loadingInstance;
   export default {
     name: 'Index',
     data () {
@@ -129,20 +128,24 @@
     },
     methods: {
       getAgency : function () {
+		//机构列表
         this.$axios(promiseBaseUrl+"Agency",{}, data => {
           this.tableData = data;
         })
       },
       showNewTransactionDialog: function(d){
+		  //添加资产交易记录弹框
         this.createform.assetDBId = d.agencyId;
         this.createform.locDetailsClass = this.createform.locDetailsClass;
         this.createform.owner = d.$class+"#"+d.agencyId;
         this.newTransactionDialog = true;
       },
       showNewParticipant: function(d){
+		  //添加机构弹框
         this.newParticipant = true;
       },
       delParticipant: function (d){
+		  //删除机构记录
         var _this = this;
         this.$confirm('此操作将永久删除该数据, 是否继续?', '提示', {
           confirmButtonText: '确定',
@@ -151,68 +154,19 @@
         }).then(() => {
           this.curlRequest(promiseBaseUrl+'Agency/'+d.agencyId,{},function(d){
             if(d.statusCode == 204){
-              successCreate('删除成功');
-              _this.getAgency()
+              _this.successNotify('删除成功');
+              _this.getAgency();
+            }else{
+              _this.errorNotify("删除"+d.agencyId+"的记录失败");
             }
           });
         }).catch(() => {
-          //alert('已取消')
+          //取消
         });
-      },
-      promiseSuccess(){
-        this.$notify({
-          title: '操作成功',
-          message: '稍后查看资产交易记录'
-        });
-      },
-      open() {
-        const h = this.$createElement;
-
-        this.$notify({
-          title: '标题名称',
-          message: h('i', { style: 'color: teal'}, '这是提示文案这是提示文案这是提示文案这是提示文案这是提示文案这是提示文案这是提示文案这是提示文案')
-        });
-      },
-      promiseAjax(url, data, callback) {
-        var _this = this;
-        var p = new Promise(function (resolve, reject) {
-          $.ajax({
-            url: url,
-            type: data == null ? 'GET' : 'POST',
-            dataType: "json",
-            data: data == null ? '' : JSON.stringify(data),
-            async: true,
-            contentType: "application/json",
-            beforeSend: function (){
-              _this.$loading({"background":"rgba(0, 0, 0, 0.8)"});
-            },
-            success: function (resp) {
-              callback(resp);
-              resolve();
-            },
-            error: function (XMLHttpRequest, textStatus, errorThrown) {
-              errorCreate(XMLHttpRequest.status+" : "+XMLHttpRequest.responseText)
-              reject();
-            }
-          });
-        });
-        return p;
-      },
-      curlRequest: function (urlPath,param,callbackFun){
-        this.$loading({"background":"rgba(0, 0, 0, 0.8)"});
-        const https = require('https');
-        const options = {
-          path: urlPath,
-          method: 'DELETE'
-        };
-        const req = https.request(options, (res) => {
-          callbackFun(res);
-        });
-        req.on('error', (e) => {
-        });
-        req.end();
       },
       submitAddLocAsset: function (){
+		  //添加资产交易记录接口
+		var _this = this;
         var where = {
           "$class": this.createform.$class,
           "assetDBId": this.createform.assetDBId+this.createform.assetDBIdNum,
@@ -229,21 +183,23 @@
           "locStatus": "SUBMITTED"
         };
         this.promiseAjax(promiseBaseUrl+'CreateLocAsset',where, function(resp){
-          successCreate('交易已生成')
+          _this.successNotify('交易已生成');
         }).then(
-          this.newTransactionDialog = false
+          _this.newTransactionDialog = false
         );
       },
       submitAddParticipant:function () {
+		  //添加机构接口
         var _this = this;
         this.promiseAjax(promiseBaseUrl+'Agency',this.participantFrom, function(resp){
-          successCreate('机构添加成功');
+          _this.successNotify('机构添加成功');
           _this.getAgency();
         }).then(
-          this.newParticipant = false
+          _this.newParticipant = false
         );
       },
       handleClose: function () {
+		 //初始化弹框输入框内容
         this.createform = {
           $class:"org.zjhl.network.CreateLocAsset",
             assetDBId:"",
@@ -270,47 +226,7 @@
       this.getAgency()
     }
   }
-  function successCreate(msg){
-    vm.$notify({
-      title: '提示',
-      message: msg,
-      duration: 0,
-      type: 'success'
-    });
-    vm.$loading.close();
-  }
-  function errorCreate(msg){
-    vm.$notify({
-      title: '提示',
-      message: msg,
-      duration: 0,
-      type: 'error'
-    });
-    vm.$loading.closeAll();
-  }
 </script>
-<!--
-
-        /*var request = require('request');
-        request.DELETE(
-          {
-            url:urlPath,
-            form:param,
-            encoding:'utf8',
-            method:DELETE,
-            headers: {
-              'Content-Type': 'application/json'
-            }
-          },
-          function(error, response, body){
-            alert(11)
-            if(response.statusCode == 200){
-              console.log(body);
-            }else{
-              console.log(response.statusCode,165);
-            }
-          }
-        )*/-->
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
   .top-tool {

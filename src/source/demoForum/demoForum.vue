@@ -10,7 +10,6 @@
 <script>
   import FormSchema from 'vue-json-schema'
   import { Option } from 'element-ui'
-  import schema from '@/schema/newsletter'
   import schemaFile from '@/schema/filedsSchema'
   FormSchema.setComponent('form', 'el-form', ({ vm }) => {
     const labelWidth = '120px'
@@ -46,7 +45,6 @@
 
   // You can also use the component object
   FormSchema.setComponent('option', Option)
-
   export default {
     data: () => ({
       schemaAjax:{},
@@ -69,6 +67,7 @@
       }
     },
     created: function () {
+
       var formD = ["$class","agencyId","areaId"];
       this.schemaAjax = initSchemaJson(formD);
 
@@ -76,6 +75,7 @@
     components: { FormSchema }
   }
   function initSchemaJson(_json){
+
     var newSch = {};
     Object.keys(schemaFile).forEach(function(key){
       schemaFile[key]["title"] = key;

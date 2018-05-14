@@ -22,9 +22,10 @@ npm run e2e
 
 # run all tests
 npm test
-```
 
 npm install element ui
+```
+
 
 # Json Schema
 用schema封装vue表单自动化组件。

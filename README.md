@@ -26,7 +26,7 @@ npm test
 
 npm install element ui
 
-Json Schema
+## Json Schema
 
 用schema封装vue表单自动化组件。
 1、预先定义所有需要的字段（类型、默认值、描述。。。）
@@ -37,5 +37,4 @@ import FormSchema from 'vue-json-schema'
 4、引入自定义字段文件
 import commintSchema from '@/schema/filedsSchema'
 我封装的是对应不同接口，所以字段后处理的方法：initSchemaJson1（）
-
 5、 和父组件 用$emit和props进行通信

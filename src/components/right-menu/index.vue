@@ -14,12 +14,18 @@
           资产
         </router-link>
       </li>
-      <li>
+      <!--<li>
         <router-link id="demoForm"
                      to="/demoForm">
           DemoForm
         </router-link>
       </li>
+      <li>
+        <router-link id="transferParameters"
+                     to="/transferParameters">
+          TransferParameters
+        </router-link>
+      </li>-->
     </ul>
   </div>
 </template>

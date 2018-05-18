@@ -58,7 +58,7 @@
         </el-form-item>
         <el-form-item label="newLocStatus" label-width="120px">
           <el-select v-model="updateFrom.statusVal" placeholder="请选择">
-            <el-option v-for="(item,index) in updateFrom.statusTextes" :label="index" :value="index" :disabled="!item"></el-option>
+            <el-option v-for="(item,index) in updateFrom.statusTextes" :key="index" :label="index" :value="index" :disabled="!item"></el-option>
           </el-select>
         </el-form-item>
       </el-form>
@@ -76,7 +76,7 @@
                :before-close="handleClose">
       <div class="lss-steps-warp">
         <el-steps :active="activeSteps"  direction="vertical">
-          <div v-for="(item,index) in statusFrom.statusTextes">
+          <div v-for="(item,index) in statusFrom.statusTextes" :key="index">
             <el-step :title="index" description="1212">{{item}}}</el-step>
           </div>
         </el-steps>

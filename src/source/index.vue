@@ -20,7 +20,7 @@
     </div>
 
     <!--芳华之黄金花-->
-    <el-dialog title="芳华之黄金花"
+    <el-dialog title="机构新交易"
                :visible.sync="newTransactionDialog"
                :close-on-click-modal="false"
                :close-on-press-escape="false"
@@ -65,7 +65,7 @@
     </el-dialog>
 
     <!--芳华之大通-->
-    <el-dialog title="芳华之大通"
+    <el-dialog title="新加机构"
       :visible.sync="newParticipant"
       :close-on-click-modal="false"
       :close-on-press-escape="false"
@@ -179,6 +179,12 @@
             "currency": this.createform.currency,
             "id": 1
           },
+		  "options": {
+			"$class": "org.zjhl.network.Options",
+			"trim": "11",
+			"interior": "11",
+			"extras": []
+		  },
           "owner": this.createform.owner,
           "locStatus": "SUBMITTED"
         };

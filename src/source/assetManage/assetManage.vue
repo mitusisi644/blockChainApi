@@ -41,7 +41,7 @@
     </div>
 
     <!--芳华之新锐-->
-    <el-dialog title="芳华之新锐" class="dialog-form-warp"
+    <el-dialog title="资产交易状态" class="dialog-form-warp"
                :visible.sync="updateStatusVisible"
                :close-on-click-modal="false"
                :close-on-press-escape="false"
@@ -116,6 +116,7 @@
         })
       },
       updateDialogForm: function (d) {
+		this.handleClose();
         var _this = this;
 		this.updateFrom.locAsset = this.updateFrom.locAsset + d.assetDBId;
         this.updateFrom.owner = d.owner;

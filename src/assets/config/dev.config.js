@@ -1,1 +1,1 @@
-global.promiseBaseUrl = 'http://192.144.145.215:3000/api/'
+global.promiseBaseUrl = 'http://localhost:3000/api/'

@@ -1,7 +1,7 @@
 <template>
   <div class="headerNav">
     <div class="top">
-      <img class="logo" src="../../assets/ico.png"><span>中金汇理标准化资产--信用证</span>
+      <img class="logo" src="../../assets/ico.png"><span>牛牛数字资产交易平台</span>
     </div>
   </div>
 </template>

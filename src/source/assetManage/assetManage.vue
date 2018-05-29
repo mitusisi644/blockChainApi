@@ -69,7 +69,7 @@
     </el-dialog>
 
     <!--芳华之进城-->
-    <el-dialog title="芳华之进城" class="dialog-form-warp" width="90%"
+    <el-dialog title="添加机构人员" class="dialog-form-warp" width="90%"
                :visible.sync="statusRecoVisible"
                :close-on-click-modal="false"
                :close-on-press-escape="false"

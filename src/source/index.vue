@@ -243,5 +243,6 @@
     height: auto;
     padding:10px;
     box-sizing: border-box;
+    border: 1px solid cornflowerblue;
   }
 </style>

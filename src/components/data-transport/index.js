@@ -26,11 +26,6 @@ module.exports = function (urlCode, formData, successFun, method, isLoading, err
     error(data){
       var s = data.responseJSON;
       alert(s.error.body);
-      /*this_.$notify({
-        title: '提示-'+data.error.statusCode,
-        message: data.error.body,
-        duration: 0
-      });*/
     }
   })
 }
